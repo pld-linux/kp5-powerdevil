@@ -25,6 +25,7 @@ BuildRequires:	kf5-kio-devel
 BuildRequires:	kf5-knotifyconfig-devel
 BuildRequires:	kf5-solid-devel
 BuildRequires:	kp5-libkscreen-devel
+BuildRequires:	kp5-plasma-workspace
 BuildRequires:	libxcb-devel
 BuildRequires:	rpmbuild(macros) >= 1.164
 BuildRequires:	xz
