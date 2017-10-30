@@ -5,7 +5,7 @@
 Summary:	Manages the power consumption settings of a Plasma Shell
 Name:		kp5-%{kpname}
 Version:	5.11.2
-Release:	1
+Release:	2
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
@@ -25,7 +25,7 @@ BuildRequires:	kf5-kio-devel
 BuildRequires:	kf5-knotifyconfig-devel
 BuildRequires:	kf5-solid-devel
 BuildRequires:	kp5-libkscreen-devel
-BuildRequires:	kp5-plasma-workspace
+BuildRequires:	kp5-plasma-workspace-devel
 BuildRequires:	libxcb-devel
 BuildRequires:	rpmbuild(macros) >= 1.164
 BuildRequires:	xz
