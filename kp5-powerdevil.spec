@@ -1,15 +1,15 @@
-%define		kdeplasmaver	5.14.5
+%define		kdeplasmaver	5.15.3
 %define		qtver		5.9.0
 %define		kpname		powerdevil
 
 Summary:	Manages the power consumption settings of a Plasma Shell
 Name:		kp5-%{kpname}
-Version:	5.14.5
+Version:	5.15.3
 Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	85cb6af97de3c5867aae2f5fb2a058a2
+# Source0-md5:	72da38b000b84ebb350b2842c22438bb
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	cmake >= 2.8.12
@@ -30,6 +30,7 @@ BuildRequires:	kf5-kwayland-devel
 BuildRequires:	kp5-libkscreen-devel
 BuildRequires:	kp5-plasma-workspace-devel
 BuildRequires:	libxcb-devel
+BuildRequires:	ninja
 BuildRequires:	rpmbuild(macros) >= 1.164
 BuildRequires:	xz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -45,16 +46,14 @@ Manages the power consumption settings of a Plasma Shell.
 %build
 install -d build
 cd build
-%cmake \
+%cmake -G Ninja \
 	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
 	../
-%{__make}
+%ninja_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
-%{__make} -C build/ install \
-        DESTDIR=$RPM_BUILD_ROOT
+%ninja_install -C build
 
 %find_lang %{kpname} --all-name --with-kde
 
