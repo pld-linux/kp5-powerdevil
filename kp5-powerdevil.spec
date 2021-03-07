@@ -1,20 +1,19 @@
-%define		kdeplasmaver	5.15.3
+%define		kdeplasmaver	5.21.2
 %define		qtver		5.9.0
 %define		kpname		powerdevil
 
 Summary:	Manages the power consumption settings of a Plasma Shell
 Name:		kp5-%{kpname}
-Version:	5.15.3
+Version:	5.21.2
 Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	72da38b000b84ebb350b2842c22438bb
+# Source0-md5:	9e19d2590d27b1e1300a6acfe20dbb60
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	cmake >= 2.8.12
 BuildRequires:	kf5-bluez-qt-devel
-BuildRequires:	kf5-networkmanager-qt-devel
 BuildRequires:	kf5-kactivities-devel
 BuildRequires:	kf5-kauth-devel
 BuildRequires:	kf5-kconfig-devel
@@ -25,8 +24,9 @@ BuildRequires:	kf5-ki18n-devel
 BuildRequires:	kf5-kidletime-devel
 BuildRequires:	kf5-kio-devel
 BuildRequires:	kf5-knotifyconfig-devel
-BuildRequires:	kf5-solid-devel
 BuildRequires:	kf5-kwayland-devel
+BuildRequires:	kf5-networkmanager-qt-devel
+BuildRequires:	kf5-solid-devel
 BuildRequires:	kp5-libkscreen-devel
 BuildRequires:	kp5-plasma-workspace-devel
 BuildRequires:	libxcb-devel
@@ -48,6 +48,7 @@ install -d build
 cd build
 %cmake -G Ninja \
 	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
+	-DHTML_INSTALL_DIR=%{_kdedocdir} \
 	../
 %ninja_build
 
@@ -65,7 +66,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{kpname}.lang
 %defattr(644,root,root,755)
-/etc/dbus-1/system.d/org.kde.powerdevil.backlighthelper.conf
 %attr(755,root,root) %{_libexecdir}/org_kde_powerdevil
 %attr(755,root,root) %{_libexecdir}/kauth/backlighthelper
 %attr(755,root,root) %{_libexecdir}/kauth/discretegpuhelper
@@ -78,7 +78,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/qt5/plugins/kcm_powerdevilactivitiesconfig.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/kcm_powerdevilglobalconfig.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/kcm_powerdevilprofilesconfig.so
-#%attr(755,root,root) %{_libdir}/qt5/plugins/kded_powerdevil.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/powerdevilbrightnesscontrolaction_config.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/powerdevildimdisplayaction_config.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/powerdevildpmsaction.so
@@ -89,12 +88,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/qt5/plugins/powerdevilsuspendsessionaction_config.so
 %{_datadir}/dbus-1/system-services/org.kde.powerdevil.backlighthelper.service
 %{_datadir}/knotifications5/powerdevil.notifyrc
-#%{_datadir}/kservices5/kded/powerdevil.desktop
 %{_datadir}/kservices5/powerdevil*.desktop
 %{_datadir}/kservicetypes5/powerdevilaction.desktop
 %{_datadir}/polkit-1/actions/org.kde.powerdevil.backlighthelper.policy
-
-/etc/dbus-1/system.d/org.kde.powerdevil.discretegpuhelper.conf
 /etc/xdg/autostart/powerdevil.desktop
 %{_libdir}/libpowerdevilconfigcommonprivate.so
 %{_libdir}/libpowerdevilcore.so
@@ -104,3 +100,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt5/plugins/powerdevilwirelesspowersavingaction_config.so
 %{_datadir}/dbus-1/system-services/org.kde.powerdevil.discretegpuhelper.service
 %{_datadir}/polkit-1/actions/org.kde.powerdevil.discretegpuhelper.policy
+%{_datadir}/dbus-1/system.d/org.kde.powerdevil.backlighthelper.conf
+%{_datadir}/dbus-1/system.d/org.kde.powerdevil.discretegpuhelper.conf
+%{systemduserunitdir}/plasma-powerdevil.service
+%attr(755,root,root) %{_prefix}/libexec/kauth/chargethresholdhelper
+%{_datadir}/dbus-1/system-services/org.kde.powerdevil.chargethresholdhelper.service
+%{_datadir}/dbus-1/system.d/org.kde.powerdevil.chargethresholdhelper.conf
+%{_datadir}/polkit-1/actions/org.kde.powerdevil.chargethresholdhelper.policy
+%{_datadir}/qlogging-categories5/powerdevil.categories
