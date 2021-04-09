@@ -1,15 +1,15 @@
-%define		kdeplasmaver	5.21.3
+%define		kdeplasmaver	5.21.4
 %define		qtver		5.9.0
 %define		kpname		powerdevil
 
 Summary:	Manages the power consumption settings of a Plasma Shell
 Name:		kp5-%{kpname}
-Version:	5.21.3
+Version:	5.21.4
 Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	bedb1c4ee00523bdf5c956bd03a24328
+# Source0-md5:	84139b3ef3166daff62412a2b1dd44f4
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	cmake >= 2.8.12
@@ -69,11 +69,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libexecdir}/org_kde_powerdevil
 %attr(755,root,root) %{_libexecdir}/kauth/backlighthelper
 %attr(755,root,root) %{_libexecdir}/kauth/discretegpuhelper
-%attr(755,root,root) %ghost %{_libdir}/libpowerdevilconfigcommonprivate.so.5
+%ghost %{_libdir}/libpowerdevilconfigcommonprivate.so.5
 %attr(755,root,root) %{_libdir}/libpowerdevilconfigcommonprivate.so.*.*.*
-%attr(755,root,root) %ghost  %{_libdir}/libpowerdevilcore.so.2
+%ghost  %{_libdir}/libpowerdevilcore.so.2
 %attr(755,root,root) %{_libdir}/libpowerdevilcore.so.*.*.*
-%attr(755,root,root) %ghost  %{_libdir}/libpowerdevilui.so.5
+%ghost  %{_libdir}/libpowerdevilui.so.5
 %attr(755,root,root) %{_libdir}/libpowerdevilui.so.*.*.*
 %attr(755,root,root) %{_libdir}/qt5/plugins/kcm_powerdevilactivitiesconfig.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/kcm_powerdevilglobalconfig.so
