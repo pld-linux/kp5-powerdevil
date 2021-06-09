@@ -1,15 +1,15 @@
-%define		kdeplasmaver	5.21.5
+%define		kdeplasmaver	5.22.0
 %define		qtver		5.9.0
 %define		kpname		powerdevil
 
 Summary:	Manages the power consumption settings of a Plasma Shell
 Name:		kp5-%{kpname}
-Version:	5.21.5
+Version:	5.22.0
 Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	a84274bd2ba8afbe9bbf8ffef7425f63
+# Source0-md5:	6aa3746f152297d7e0a6c8e606169fb7
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	cmake >= 2.8.12
@@ -28,7 +28,7 @@ BuildRequires:	kf5-kwayland-devel
 BuildRequires:	kf5-networkmanager-qt-devel
 BuildRequires:	kf5-solid-devel
 BuildRequires:	kp5-libkscreen-devel
-BuildRequires:	kp5-plasma-workspace-devel
+BuildRequires:	kp5-plasma-workspace-devel >= %{kdeplasmaver}
 BuildRequires:	libxcb-devel
 BuildRequires:	ninja
 BuildRequires:	rpmbuild(macros) >= 1.164
@@ -80,7 +80,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/qt5/plugins/kcm_powerdevilprofilesconfig.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/powerdevilbrightnesscontrolaction_config.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/powerdevildimdisplayaction_config.so
-%attr(755,root,root) %{_libdir}/qt5/plugins/powerdevildpmsaction.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/powerdevildpmsaction_config.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/powerdevilhandlebuttoneventsaction_config.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/powerdevilkeyboardbrightnesscontrolaction_config.so
