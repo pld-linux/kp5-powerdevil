@@ -8,7 +8,7 @@
 Summary:	Manages the power consumption settings of a Plasma Shell
 Name:		kp5-%{kpname}
 Version:	5.26.0
-Release:	2
+Release:	3
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
@@ -115,6 +115,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt5/plugins/plasma/kcms/systemsettings_qwidgets/kcm_powerdevilactivitiesconfig.so
 %{_libdir}/qt5/plugins/plasma/kcms/systemsettings_qwidgets/kcm_powerdevilglobalconfig.so
 %{_libdir}/qt5/plugins/plasma/kcms/systemsettings_qwidgets/kcm_powerdevilprofilesconfig.so
+%dir %{_libdir}/qt5/plugins/powerdevil
+%dir %{_libdir}/qt5/plugins/powerdevil/action
 %{_libdir}/qt5/plugins/powerdevil/action/powerdevil_brightnesscontrolaction.so
 %{_libdir}/qt5/plugins/powerdevil/action/powerdevil_dimdisplayaction.so
 %{_libdir}/qt5/plugins/powerdevil/action/powerdevil_dpmsaction.so
