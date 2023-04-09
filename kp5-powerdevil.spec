@@ -8,7 +8,7 @@
 Summary:	Manages the power consumption settings of a Plasma Shell
 Name:		kp5-%{kpname}
 Version:	5.27.4
-Release:	3
+Release:	4
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
