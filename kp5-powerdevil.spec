@@ -19,6 +19,7 @@ BuildRequires:	cmake >= 3.16.0
 BuildRequires:	kf5-bluez-qt-devel
 BuildRequires:	kf5-kactivities-devel
 BuildRequires:	kf5-kauth-devel
+BuildRequires:	kf5-kcmutils-devel
 BuildRequires:	kf5-kconfig-devel
 BuildRequires:	kf5-kdbusaddons-devel
 BuildRequires:	kf5-kdelibs4support-devel
