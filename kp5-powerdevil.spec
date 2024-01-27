@@ -27,6 +27,8 @@ BuildRequires:	kf5-kglobalaccel-devel
 BuildRequires:	kf5-ki18n-devel
 BuildRequires:	kf5-kidletime-devel
 BuildRequires:	kf5-kio-devel
+BuildRequires:	kf5-kirigami2-devel
+BuildRequires:	kf5-knotifications-devel
 BuildRequires:	kf5-knotifyconfig-devel
 BuildRequires:	kf5-kwayland-devel
 BuildRequires:	kf5-networkmanager-qt-devel
