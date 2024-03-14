@@ -1,38 +1,39 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeplasmaver	5.93.0
+%define		kdeplasmaver	5.27.10
 %define		qtver		5.15.2
 %define		kpname		powerdevil
 
 Summary:	Manages the power consumption settings of a Plasma Shell
 Name:		kp5-%{kpname}
-Version:	5.93.0
-Release:	0.1
+Version:	5.27.10
+Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
-Source0:	https://download.kde.org/unstable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	1b0d03debe19a91ea0289010d16f994f
+Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
+# Source0-md5:	cc39dc5777614bd89ae96d38008dc7c9
 URL:		https://www.kde.org/
-BuildRequires:	Qt6Core-devel >= %{qtver}
+BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	cmake >= 3.16.0
-BuildRequires:	kf6-bluez-qt-devel
-BuildRequires:	kf6-kauth-devel
-BuildRequires:	kf6-kcmutils-devel
-BuildRequires:	kf6-kconfig-devel
-BuildRequires:	kf6-kdbusaddons-devel
-BuildRequires:	kf6-kglobalaccel-devel
-BuildRequires:	kf6-ki18n-devel
-BuildRequires:	kf6-kidletime-devel
-BuildRequires:	kf6-kio-devel
-BuildRequires:	kf6-kirigami-devel
-BuildRequires:	kf6-knotifications-devel
-BuildRequires:	kf6-knotifyconfig-devel
-BuildRequires:	kf6-networkmanager-qt-devel
-BuildRequires:	kf6-solid-devel
-BuildRequires:	kp5-kwayland-devel
+BuildRequires:	kf5-bluez-qt-devel
+BuildRequires:	kf5-kactivities-devel
+BuildRequires:	kf5-kauth-devel
+BuildRequires:	kf5-kcmutils-devel
+BuildRequires:	kf5-kconfig-devel
+BuildRequires:	kf5-kdbusaddons-devel
+BuildRequires:	kf5-kdelibs4support-devel
+BuildRequires:	kf5-kglobalaccel-devel
+BuildRequires:	kf5-ki18n-devel
+BuildRequires:	kf5-kidletime-devel
+BuildRequires:	kf5-kio-devel
+BuildRequires:	kf5-kirigami2-devel
+BuildRequires:	kf5-knotifications-devel
+BuildRequires:	kf5-knotifyconfig-devel
+BuildRequires:	kf5-kwayland-devel
+BuildRequires:	kf5-networkmanager-qt-devel
+BuildRequires:	kf5-solid-devel
 BuildRequires:	kp5-libkscreen-devel
-BuildRequires:	kp5-plasma-activities-devel
 BuildRequires:	kp5-plasma-workspace-devel >= %{kdeplasmaver}
 BuildRequires:	libxcb-devel
 BuildRequires:	ninja
@@ -40,7 +41,7 @@ BuildRequires:	rpmbuild(macros) >= 1.164
 BuildRequires:	xz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		qt6dir		%{_libdir}/qt6
+%define		qt5dir		%{_libdir}/qt5
 
 %description
 Manages the power consumption settings of a Plasma Shell.
@@ -75,43 +76,57 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{kpname}.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libexecdir}/org_kde_powerdevil
+%attr(755,root,root) %{_libexecdir}/kauth/backlighthelper
+%attr(755,root,root) %{_libexecdir}/kauth/discretegpuhelper
+%ghost %{_libdir}/libpowerdevilconfigcommonprivate.so.5
+%attr(755,root,root) %{_libdir}/libpowerdevilconfigcommonprivate.so.*.*.*
 %ghost  %{_libdir}/libpowerdevilcore.so.2
 %attr(755,root,root) %{_libdir}/libpowerdevilcore.so.*.*.*
+%ghost  %{_libdir}/libpowerdevilui.so.5
+%attr(755,root,root) %{_libdir}/libpowerdevilui.so.*.*.*
+%attr(755,root,root) %{_libdir}/qt5/plugins/powerdevilbrightnesscontrolaction_config.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/powerdevildimdisplayaction_config.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/powerdevildpmsaction_config.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/powerdevilhandlebuttoneventsaction_config.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/powerdevilkeyboardbrightnesscontrolaction_config.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/powerdevilrunscriptaction_config.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/powerdevilsuspendsessionaction_config.so
 %{_datadir}/dbus-1/system-services/org.kde.powerdevil.backlighthelper.service
+%{_datadir}/knotifications5/powerdevil.notifyrc
 %{_datadir}/polkit-1/actions/org.kde.powerdevil.backlighthelper.policy
 /etc/xdg/autostart/powerdevil.desktop
 %{_libdir}/libpowerdevilconfigcommonprivate.so
 %{_libdir}/libpowerdevilcore.so
-%dir %{_libdir}/qt6/plugins/kf6/powerdevil
-%attr(755,root,root) %{_libdir}/qt6/plugins/kf6/powerdevil/powerdevilupowerbackend.so
+%{_libdir}/libpowerdevilui.so
+%dir %{_libdir}/qt5/plugins/kf5/powerdevil
+%{_libdir}/qt5/plugins/kf5/powerdevil/powerdevilupowerbackend.so
+%{_libdir}/qt5/plugins/powerdevilwirelesspowersavingaction_config.so
 %{_datadir}/dbus-1/system-services/org.kde.powerdevil.discretegpuhelper.service
 %{_datadir}/polkit-1/actions/org.kde.powerdevil.discretegpuhelper.policy
 %{_datadir}/dbus-1/system.d/org.kde.powerdevil.backlighthelper.conf
 %{_datadir}/dbus-1/system.d/org.kde.powerdevil.discretegpuhelper.conf
 %{systemduserunitdir}/plasma-powerdevil.service
+%attr(755,root,root) %{_prefix}/libexec/kauth/chargethresholdhelper
 %{_datadir}/dbus-1/system-services/org.kde.powerdevil.chargethresholdhelper.service
 %{_datadir}/dbus-1/system.d/org.kde.powerdevil.chargethresholdhelper.conf
 %{_datadir}/polkit-1/actions/org.kde.powerdevil.chargethresholdhelper.policy
+%{_datadir}/qlogging-categories5/powerdevil.categories
+%{_libdir}/qt5/plugins/powerdevilpowerprofileaction_config.so
 
-%dir %{_libdir}/qt6/plugins/powerdevil
-%dir %{_libdir}/qt6/plugins/powerdevil/action
-%attr(755,root,root) %{_libdir}/qt6/plugins/powerdevil/action/powerdevil_brightnesscontrolaction.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/powerdevil/action/powerdevil_dimdisplayaction.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/powerdevil/action/powerdevil_dpmsaction.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/powerdevil/action/powerdevil_handlebuttoneventsaction.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/powerdevil/action/powerdevil_keyboardbrightnesscontrolaction.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/powerdevil/action/powerdevil_powerprofileaction.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/powerdevil/action/powerdevil_runscriptaction.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/powerdevil/action/powerdevil_suspendsessionaction.so
-
-%{systemduserunitdir}/plasma-powerprofile-osd.service
-%attr(755,root,root) %{_libdir}/libpowerdevilconfigcommonprivate.so.*.*
-%ghost %{_libdir}/libpowerdevilconfigcommonprivate.so.6
-%attr(755,root,root) %{_libdir}/qt6/plugins/plasma/kcms/systemsettings/kcm_powerdevilprofilesconfig.so
-%attr(755,root,root) %{_prefix}/libexec/kf6/kauth/backlighthelper
-%attr(755,root,root) %{_prefix}/libexec/kf6/kauth/chargethresholdhelper
-%attr(755,root,root) %{_prefix}/libexec/kf6/kauth/discretegpuhelper
-%attr(755,root,root) %{_prefix}/libexec/power_profile_osd_service
+%{_libdir}/qt5/plugins/plasma/kcms/systemsettings_qwidgets/kcm_powerdevilactivitiesconfig.so
+%{_libdir}/qt5/plugins/plasma/kcms/systemsettings_qwidgets/kcm_powerdevilglobalconfig.so
+%{_libdir}/qt5/plugins/plasma/kcms/systemsettings_qwidgets/kcm_powerdevilprofilesconfig.so
+%dir %{_libdir}/qt5/plugins/powerdevil
+%dir %{_libdir}/qt5/plugins/powerdevil/action
+%{_libdir}/qt5/plugins/powerdevil/action/powerdevil_brightnesscontrolaction.so
+%{_libdir}/qt5/plugins/powerdevil/action/powerdevil_dimdisplayaction.so
+%{_libdir}/qt5/plugins/powerdevil/action/powerdevil_dpmsaction.so
+%{_libdir}/qt5/plugins/powerdevil/action/powerdevil_handlebuttoneventsaction.so
+%{_libdir}/qt5/plugins/powerdevil/action/powerdevil_keyboardbrightnesscontrolaction.so
+%{_libdir}/qt5/plugins/powerdevil/action/powerdevil_powerprofileaction.so
+%{_libdir}/qt5/plugins/powerdevil/action/powerdevil_runscriptaction.so
+%{_libdir}/qt5/plugins/powerdevil/action/powerdevil_suspendsessionaction.so
+%{_libdir}/qt5/plugins/powerdevil/action/powerdevil_wirelesspowersavingaction.so
+%{_desktopdir}/kcm_powerdevilactivitiesconfig.desktop
+%{_desktopdir}/kcm_powerdevilglobalconfig.desktop
 %{_desktopdir}/kcm_powerdevilprofilesconfig.desktop
-%{_datadir}/dbus-1/services/org.kde.powerdevil.powerProfileOsdService.service
-%{_datadir}/qlogging-categories6/powerdevil.categories
