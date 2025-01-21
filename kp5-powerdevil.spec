@@ -1,18 +1,18 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeplasmaver	5.27.11
+%define		kdeplasmaver	5.27.12
 %define		qtver		5.15.2
 %define		kpname		powerdevil
 
 Summary:	Manages the power consumption settings of a Plasma Shell
 Name:		kp5-%{kpname}
-Version:	5.27.11
-Release:	2
+Version:	5.27.12
+Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	cec65575ae03f47616ee334135574e43
+# Source0-md5:	027dfca9aba7f558a2da7aea427c5bf3
 URL:		https://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	cmake >= 3.16.0
